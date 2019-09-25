@@ -5,7 +5,4 @@ COPY requirements.txt /notebooks/
 
 RUN /opt/conda/bin/conda install -f -y -c conda-forge  --file requirements.txt
 
-WORKDIR /notebooks
-RUN pip install -r requirements.txt
-
 ENTRYPOINT [ "/opt/conda/bin/jupyter", "notebook", "--notebook-dir=/notebooks", "--ip='*'", "--port=8888", "--no-browser", "--allow-root"]
