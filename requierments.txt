@@ -1,0 +1,10 @@
+jupyter==1.0.0
+pandas==0.20.1
+numpy==1.16.1
+matplotlib==2.0.2
+tensorflow==1.9.0
+theano==1.0.2
+scikit-learn==0.18.1
+keras==2.2.0
+pydot
+graphviz

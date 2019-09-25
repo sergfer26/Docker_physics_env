@@ -1,0 +1,29 @@
+FROM python:3.7
+
+
+RUN echo "----------------------------" 
+RUN echo "---Creación de enviroment---"
+RUN echo "----------------------------"
+
+RUN echo "\n\n--> Creando...\n"
+
+WORKDIR  /tmp
+RUN echo "--> Descargando...\n"
+RUN curl -O https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh
+RUN sha256sum Anaconda3-5.0.1-Linux-x86_64.sh
+RUN bash Anaconda3-5.0.1-Linux-x86_64.sh -b -p /opt/conda
+RUN ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh
+RUN echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc
+RUN echo "conda activate base" >> ~/.bashrc
+RUN find /opt/conda/ -follow -type f -name '*.a' -delete
+RUN find /opt/conda/ -follow -type f -name '*.js.map' -delete
+RUN /opt/conda/bin/conda clean -a -y
+
+RUN /opt/conda/bin/conda source activate base
+
+COPY requirements.txt /notebooks/
+
+WORKDIR /notebooks
+RUN pip install -r requirements.txt
+
+ENTRYPOINT ["jupyter", "notebook", "--ip=0.0.0.0", "--allow-root"]
