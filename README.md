@@ -11,7 +11,7 @@ docker build --build-arg ENV=patolli -t physics-patolli-env .
 
 ## Run image
 ```bash
-docker run -p 8888:8888 -v "$(pwd)/notebooks":/notebooks -it rl-env
+docker run -p 8888:8888 -v "$(pwd)/notebooks":/notebooks -it physics-patolli-env
 ```
 
 For more details vist: https://docs.docker.com/engine/reference/builder/
